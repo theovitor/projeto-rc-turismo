@@ -20,6 +20,9 @@ import javafx.scene.control.TableView;
  * @author IFNMG
  */
 public class Janela_condutorController implements Initializable {
+    
+    
+    ///teste
 
     @FXML
     private JFXTextField tfid;
