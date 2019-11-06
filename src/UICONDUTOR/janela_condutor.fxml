@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MAIN.condutor.Janela_condutorController">
+   <children>
+      <Label alignment="CENTER" prefHeight="42.0" prefWidth="600.0" style="-fx-background-color: black;" text="CADASTRO DE CONDUTORES" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="tfid" editable="false" labelFloat="true" layoutX="45.0" layoutY="58.0" promptText="ID" />
+      <JFXTextField fx:id="tfnomemotorista" labelFloat="true" layoutX="45.0" layoutY="83.0" prefHeight="25.0" prefWidth="135.0" promptText="NOME DO MOTORISTA" />
+      <JFXTextField fx:id="tfsetor" labelFloat="true" layoutX="45.0" layoutY="108.0" promptText="SETOR" />
+      <JFXTextField fx:id="tfcnh" labelFloat="true" layoutX="45.0" layoutY="133.0" promptText="CNH" />
+      <JFXButton layoutX="243.0" layoutY="58.0" onAction="#salvar" text="Salvar" />
+      <JFXButton layoutX="243.0" layoutY="83.0" onAction="#editar" text="Editar" />
+      <JFXButton layoutX="243.0" layoutY="108.0" onAction="#excluir" text="Excluir" />
+      <JFXButton layoutX="243.0" layoutY="133.0" onAction="#buscar" text="Buscar" />
+      <TableView fx:id="tbcondutor" layoutX="14.0" layoutY="235.0" prefHeight="348.0" prefWidth="566.0">
+        <columns>
+          <TableColumn fx:id="colid" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="colnome" prefWidth="262.0" text="Nome do Motorista" />
+            <TableColumn fx:id="colsetor" prefWidth="99.0" text="Setor" />
+            <TableColumn fx:id="colcnh" prefWidth="129.0" text="CNH" />
+        </columns>
+      </TableView>
+      <Separator layoutX="14.0" layoutY="192.0" prefHeight="14.0" prefWidth="566.0" />
+   </children>
+</AnchorPane>
