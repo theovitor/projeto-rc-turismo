@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.PASSAGEIRO.JanelaPassageiroController">
+   <children>
+      <Label alignment="CENTER" prefHeight="42.0" prefWidth="664.0" style="-fx-background-color: black;" text="CADASTRO DE PASSAGEIRO" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="tfid" editable="false" labelFloat="true" layoutX="14.0" layoutY="58.0" prefHeight="25.0" prefWidth="40.0" promptText="ID" />
+      <JFXTextField fx:id="tfnomepassageiro" labelFloat="true" layoutX="61.0" layoutY="58.0" prefHeight="25.0" prefWidth="191.0" promptText="NOME" />
+      <JFXTextField fx:id="tfsetor" labelFloat="true" layoutX="551.0" layoutY="58.0" prefHeight="25.0" prefWidth="99.0" promptText="SETOR" />
+      <JFXTextField fx:id="tfrua" labelFloat="true" layoutX="15.0" layoutY="98.0" prefHeight="25.0" prefWidth="127.0" promptText="RUA" />
+      <JFXTextField fx:id="tfnumero" labelFloat="true" layoutX="150.0" layoutY="98.0" prefHeight="25.0" prefWidth="56.0" promptText="NUMERO" />
+      <JFXTextField fx:id="tfcep" labelFloat="true" layoutX="405.0" layoutY="98.0" prefHeight="25.0" prefWidth="79.0" promptText="CEP" />
+      <JFXTextField fx:id="tfcity" labelFloat="true" layoutX="298.0" layoutY="98.0" prefHeight="25.0" prefWidth="99.0" promptText="CIDADE" />
+      <JFXTextField fx:id="tfemail" labelFloat="true" layoutX="381.0" layoutY="58.0" prefHeight="25.0" prefWidth="159.0" promptText="E-MAIL" />
+      <JFXTextField fx:id="tfcpf" labelFloat="true" layoutX="265.0" layoutY="58.0" prefHeight="25.0" prefWidth="110.0" promptText="CPF" />
+      <JFXTextField fx:id="tfcomplemento" labelFloat="true" layoutX="491.0" layoutY="98.0" prefHeight="25.0" prefWidth="159.0" promptText="COMPLEMENTO" />
+      <JFXTextField fx:id="tfbairro" labelFloat="true" layoutX="213.0" layoutY="98.0" prefHeight="25.0" prefWidth="79.0" promptText="BAIRRO" />
+      <JFXTextField fx:id="tfnomeGer" labelFloat="true" layoutX="15.0" layoutY="139.0" promptText="NOME DO GERENTE" />
+      <JFXTextField fx:id="tfemailGer" labelFloat="true" layoutX="157.0" layoutY="139.0" promptText="E-MAIL DO GERENTE" />
+      <JFXButton layoutX="448.0" layoutY="172.0" onAction="#salvar" text="Salvar">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="500.0" layoutY="172.0" onAction="#editar" text="Editar">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="552.0" layoutY="172.0" onAction="#excluir" text="Excluir">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="169.0" layoutY="224.0" onAction="#buscar" text="Buscar">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <Separator layoutX="11.0" layoutY="215.0" prefHeight="0.0" prefWidth="642.0" />
+      <TableView fx:id="tbPassageiro" layoutX="11.0" layoutY="269.0" prefHeight="317.0" prefWidth="642.0">
+        <columns>
+            <TableColumn fx:id="colid" minWidth="5.0" prefWidth="31.0" text="ID" />
+          <TableColumn fx:id="colnome" minWidth="100.0" prefWidth="67.0" sortable="false" text="NOME" />
+          <TableColumn fx:id="colcpf" minWidth="40.0" prefWidth="86.0" text="CPF" />
+            <TableColumn fx:id="colmail" minWidth="40.0" prefWidth="89.0" text="E-MAIL" />
+            <TableColumn fx:id="colsetor" minWidth="50.0" prefWidth="0.0" text="SETOR" />
+            <TableColumn fx:id="colrua" minWidth="70.0" prefWidth="75.0" text="RUA" />
+            <TableColumn fx:id="colnumero" minWidth="20.0" prefWidth="75.0" text="NÚMERO" />
+            <TableColumn fx:id="colbairro" minWidth="40.0" prefWidth="89.0" text="BAIRRO" />
+            <TableColumn fx:id="colcidade" minWidth="50.0" prefWidth="20.0" text="CIDADE" />
+            <TableColumn fx:id="colcep" minWidth="40.0" prefWidth="0.0" text="CEP" />
+            <TableColumn fx:id="colcomp" minWidth="100.0" prefWidth="67.0" text="COMPLEMENTO" />
+            <TableColumn fx:id="colNger" minWidth="100.0" prefWidth="100.0" text="NOME DO GERENTE" />
+            <TableColumn fx:id="colEger" minWidth="40.0" prefWidth="0.0" text="E-MAIL DO GERENTE" />
+        </columns>
+      </TableView>
+      <Label layoutX="14.0" layoutY="172.0" prefHeight="29.0" prefWidth="51.0" text="Dirige?">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cbDirige" layoutX="55.0" layoutY="174.0" />
+      <JFXTextField fx:id="tfBuscarNome" layoutX="15.0" layoutY="226.0" promptText="Nome" />
+   </children>
+</AnchorPane>

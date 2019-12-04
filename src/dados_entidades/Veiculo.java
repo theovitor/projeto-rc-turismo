@@ -17,18 +17,17 @@ public class Veiculo {
     private String modelo;
     private String localidade;
     private int n_passageiros;
-    private boolean disponivel;
 
     public Veiculo() {
     }
 
-    public Veiculo(String placa, String marca, String modelo, String localidade, int n_passageiros, boolean disponivel) {
+    public Veiculo(String placa, String marca, String modelo, String localidade, int n_passageiros) {
         this.setPlaca(placa);
         this.setMarca(marca);
         this.setModelo(modelo);
         this.setLocalidade(localidade);
         this.setN_passageiros(n_passageiros);
-        this.setDisponivel(disponivel);
+   
     }
 
     public Integer getId_veiculo() {
@@ -78,15 +77,7 @@ public class Veiculo {
     public void setN_passageiros(int n_passageiros) {
         this.n_passageiros = n_passageiros;
     }
-
-    public boolean isDisponivel() {
-        return disponivel;
-    }
-
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
-    }
-
+    
     @Override
     public int hashCode() {
         int hash = 7;

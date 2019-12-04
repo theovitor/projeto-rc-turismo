@@ -24,8 +24,7 @@ public Condutor(){}
         this.setSetor(setor);
         this.setCNH(CNH);
     }
-
-
+    
     public Integer getId_motorista() {
         return id_motorista;
     }
@@ -56,6 +55,9 @@ public Condutor(){}
 
     public void setCNH(int CNH) {
         this.CNH = CNH;
+    }
+    public String toString(){
+        return nome_motorista;
     }
 
     @Override

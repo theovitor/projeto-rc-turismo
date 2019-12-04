@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -40,34 +41,77 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void cadastrar_condutor(ActionEvent event)throws IOException {
         
-                Parent root = FXMLLoader.load(getClass().getResource("/UICONDUTOR/janela_condutor.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/UI/CONDUTOR/janelaCondutor.fxml"));
         Scene scene=new Scene(root);
         Stage stage=new Stage(StageStyle.UTILITY);
-        stage.setTitle("Cadastro de condutores");
+        stage.setTitle("Cadastro de Condutores");
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
-        
     }
 
     @FXML
-    private void cadastrar_localidade(ActionEvent event) {
+    private void cadastrar_localidade(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/UI/LOCALIDADE/janelaLocalidade.fxml"));
+        Scene scene=new Scene(root);
+        Stage stage=new Stage(StageStyle.UTILITY);
+        stage.setTitle("Cadastro de Localidades");
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
 
     @FXML
-    private void cadastrar_veiculo(ActionEvent event) {
+    private void cadastrar_veiculo(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/UI/VEICULO/janelaVeiculo.fxml"));
+        Scene scene=new Scene(root);
+        Stage stage=new Stage(StageStyle.UTILITY);
+        stage.setTitle("Cadastro de Veiculos");
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
 
     @FXML
-    private void cadastrar_passageiro(ActionEvent event) {
+    private void cadastrar_passageiro(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/UI/PASSAGEIRO/janelaPassageiro.fxml"));
+        Scene scene=new Scene(root);
+        Stage stage=new Stage(StageStyle.UTILITY);
+        stage.setTitle("Cadastro de Passageiros");
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
 
     @FXML
-    private void criar_requisicao(ActionEvent event) {
+    private void criar_requisicao(ActionEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("/UI/REQUISICAO/janelaRequisicao.fxml"));
+        Scene scene=new Scene(root);
+        Stage stage=new Stage(StageStyle.UTILITY);
+        stage.setTitle("Cadastro de Requisição");
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
+    }
+
+    private void sobre(ActionEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("/UI/SOBRE/janelaSobre.fxml"));
+        Scene scene=new Scene(root);
+        Stage stage=new Stage(StageStyle.UTILITY);
+        stage.setTitle("Informações Sobre o Projeto");
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
 
     @FXML
-    private void sobre(ActionEvent event) {
+    private void gerenciar(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/UI/GERENCIAR/janelaGerenciar.fxml"));
+        Scene scene=new Scene(root);
+        Stage stage=new Stage(StageStyle.UTILITY);
+        stage.setTitle("Gerenciamento de Requisição");
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
-    
 }

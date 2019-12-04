@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.GERENCIAR.JanelaGerenciarController">
+   <children>
+      <Label alignment="CENTER" layoutX="6.0" layoutY="10.0" prefHeight="42.0" prefWidth="606.0" style="-fx-background-color: black;" text="GERENCIAR VIAGEM" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="tfid" editable="false" labelFloat="true" layoutX="49.0" layoutY="113.0" prefHeight="25.0" prefWidth="55.0" promptText="ID" />
+      <JFXComboBox fx:id="cbdestino" layoutX="39.0" layoutY="384.0" prefHeight="25.0" prefWidth="171.0" promptText="DESTINO" />
+      <JFXTextField fx:id="tfcc" layoutX="39.0" layoutY="424.0" prefHeight="25.0" prefWidth="171.0" promptText="CENTRO DE CUSTO" />
+      <JFXComboBox fx:id="cbpass1" layoutX="39.0" layoutY="471.0" prefHeight="25.0" prefWidth="171.0" promptText="PASSAGEIRO 1" />
+      <JFXComboBox fx:id="cbpass2" layoutX="39.0" layoutY="506.0" prefHeight="25.0" prefWidth="171.0" promptText="PASSAGEIRO 2" />
+      <JFXComboBox fx:id="cbpass3" layoutX="39.0" layoutY="539.0" prefHeight="25.0" prefWidth="171.0" promptText="PASSAGEIRO 3" />
+      <JFXTimePicker fx:id="tphida" defaultColor="BLACK" layoutX="49.0" layoutY="241.0" promptText="HORA IDA" />
+      <JFXDatePicker fx:id="dpvolta" defaultColor="BLACK" layoutX="49.0" layoutY="200.0" promptText="VOLTA" />
+      <JFXDatePicker fx:id="dpida" defaultColor="BLACK" layoutX="40.0" layoutY="66.0" promptText="DATA" />
+      <JFXTimePicker fx:id="tphvolta" defaultColor="BLACK" layoutX="49.0" layoutY="289.0" promptText="HORA VOLTA" />
+      <JFXComboBox fx:id="cborigem" layoutX="53.0" layoutY="345.0" prefHeight="25.0" prefWidth="164.0" promptText="ORIGEM" />
+      <TableView fx:id="tbrequisicao" layoutX="293.0" layoutY="384.0" prefHeight="200.0" prefWidth="562.0">
+         <columns>
+            <TableColumn fx:id="colid" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="coldataida" prefWidth="75.0" text="DATA IDA" />
+            <TableColumn fx:id="coldatavolta" prefWidth="75.0" text="DATA VOLTA" />
+            <TableColumn fx:id="colhoraida" prefWidth="75.0" text="HORA IDA" />
+            <TableColumn fx:id="colhoravolta" prefWidth="75.0" text="HORA VOLTA" />
+            <TableColumn fx:id="coloirgem" prefWidth="75.0" text="ORIGEM" />
+            <TableColumn fx:id="coldestino" prefWidth="75.0" text="DESTINO" />
+            <TableColumn fx:id="colcc" prefWidth="75.0" text="C. CUSTO" />
+            <TableColumn fx:id="colhotel" prefWidth="75.0" text="HOTEL?" />
+            <TableColumn fx:id="colp1" prefWidth="75.0" text="PASSAGEIRO 1" />
+            <TableColumn fx:id="colp2" prefWidth="75.0" text="PASSAGEIRO 2" />
+            <TableColumn fx:id="colp3" prefWidth="75.0" text="PASSAGEIRO 3" />
+            <TableColumn fx:id="colp4" prefWidth="75.0" text="PASSAGEIRO 4" />
+            <TableColumn fx:id="colmotivoviagem" prefWidth="75.0" text="MOTIVO DA VIAGEM" />
+            <TableColumn fx:id="colobs" prefWidth="75.0" text="OBSERVAÇÕES" />
+            <TableColumn fx:id="colsituacao" prefWidth="75.0" text="SITUAÇÃO" />
+            <TableColumn fx:id="colmotorista" prefWidth="75.0" text="MOTORISTA" />
+            <TableColumn fx:id="colveiculo" prefWidth="75.0" text="VEICULO" />
+         </columns>
+      </TableView>
+      <JFXComboBox fx:id="cbpass4" layoutX="40.0" layoutY="564.0" prefHeight="25.0" prefWidth="171.0" promptText="PASSAGEIRO 4" />
+      <JFXTextArea fx:id="tamotivo" layoutX="259.0" layoutY="98.0" prefHeight="77.0" prefWidth="206.0" text="MOTIVO DA VIAGEM" />
+      <JFXComboBox fx:id="cbhotel" layoutX="293.0" layoutY="66.0" prefHeight="25.0" prefWidth="127.0" promptText="RESERVAR HOTEL?" />
+      <JFXTextArea fx:id="taobs" layoutX="481.0" layoutY="98.0" prefHeight="77.0" prefWidth="206.0" text="OBSERVAÇÕES" />
+      <JFXButton layoutX="293.0" layoutY="343.0" onAction="#confirmar" text="Confirmar">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="381.0" layoutY="343.0" onAction="#gerenciar" text="Gerenciar">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="465.0" layoutY="343.0" onAction="#cancelar" text="Cancelar">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="217.0" layoutY="64.0" onAction="#buscar" text="Buscar">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXComboBox fx:id="cbsituacao" layoutX="258.0" layoutY="200.0" promptText="SITUAÇÃO" />
+      <JFXComboBox fx:id="cbmotorista" layoutX="258.0" layoutY="241.0" promptText="MOTORISTA" />
+      <JFXComboBox fx:id="cbveiculo" layoutX="258.0" layoutY="289.0" promptText="VEICULO" />
+   </children>
+</AnchorPane>

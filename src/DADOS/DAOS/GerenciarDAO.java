@@ -1,52 +1,61 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package DADOS.DAOS;
 
 import UTIL.JPAUtil;
-import dados_entidades.Passageiro;
+import dados_entidades.Requisicao;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-        
-public class PassageiroDAO {
-    public void save_passag(Passageiro p){
+
+/**
+ *
+ * @author Sarah
+ */
+public class GerenciarDAO {
+    public void save_grc(Requisicao g){
         
         EntityManager gerenciador =JPAUtil.getGerenciador();
         gerenciador.getTransaction().begin();
-        gerenciador.persist(p);
+        gerenciador.persist(g);
         gerenciador.getTransaction().commit();
         
     }
     
-    public List<Passageiro> listar() {
+    
+    public List<Requisicao> listar() {
 
         EntityManager gerenciador = JPAUtil.getGerenciador();
         TypedQuery consulta = gerenciador.createQuery(
-                "Select a from Passageiro a", Passageiro.class);
+                "Select a from Requisicao a", Requisicao.class);
         return consulta.getResultList();
         
     }
     
-    public void editar(Passageiro p){
+    public void editar(Requisicao g){
         EntityManager gerenciador = JPAUtil.getGerenciador();
         gerenciador.getTransaction().begin();
-        gerenciador.merge(p);
+        gerenciador.merge(g);
         gerenciador.getTransaction().commit();
     }
     
-    public void excluir(Passageiro p){
+    public void excluir(Requisicao g){
         EntityManager gerenciador = JPAUtil.getGerenciador();
         gerenciador.getTransaction().begin();
-        p=gerenciador.merge(p);
-        gerenciador.remove(p);
+        g=gerenciador.merge(g);
+        gerenciador.remove(g);
         gerenciador.getTransaction().commit();
     }
-    public List<Passageiro> buscar(String n){
+    public List<Requisicao> buscar(LocalDate g){
         EntityManager gerenciador = JPAUtil.getGerenciador();
         TypedQuery consulta = gerenciador.createQuery(
-                "Select a from Passageiro a where a.nome like :nome", Passageiro.class);
-        consulta.setParameter("nome", n+"%");
+                "Select a from Requisicao a where a.ida like :ida", Requisicao.class);
+        consulta.setParameter("ida", g);
         return consulta.getResultList();
-    }
     
-    
+}
 }

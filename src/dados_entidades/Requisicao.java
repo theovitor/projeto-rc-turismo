@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Requisicao {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_rc;
@@ -19,16 +19,15 @@ public class Requisicao {
     private LocalTime hora_ida;
     private LocalDate volta;
     private LocalTime hora_volta;
-    
+
     @ManyToOne(optional = false)
     private Localidade origem;
-    
+
     @ManyToOne(optional = false)
     private Localidade destino;
-    
+
     private String centro_custo;
-    
-    
+
     @ManyToOne(optional = false)
     private Passageiro passageiro1;
     @ManyToOne
@@ -37,25 +36,22 @@ public class Requisicao {
     private Passageiro passageiro3;
     @ManyToOne
     private Passageiro passageiro4;
-    
-    
+
     private String motivo;
-    private boolean hotel;
+    private String hotel;
     private String observacoes;
     private String situacao;
-    
+
     @ManyToOne
     private Condutor motorista;
     @ManyToOne
     private Veiculo carro;
-    
-    
 
     public Requisicao() {
     }
 
-    public Requisicao(LocalDate ida, LocalTime hora_ida, LocalDate volta, LocalTime hora_volta, Localidade origem, Localidade destino, String centro_custo, Passageiro passageiro1, Passageiro passageiro2, Passageiro passageiro3, Passageiro passageiro4, String motivo, boolean hotel, String observacoes, String situacao, Condutor motorista, Veiculo carro) {
-        this.setIda (ida);
+    public Requisicao(LocalDate ida, LocalTime hora_ida, LocalDate volta, LocalTime hora_volta, Localidade origem, Localidade destino, String centro_custo, Passageiro passageiro1, Passageiro passageiro2, Passageiro passageiro3, Passageiro passageiro4, String motivo, String hotel, String observacoes, String situacao, Condutor motorista, Veiculo carro) {
+        this.setIda(ida);
         this.setHora_ida(hora_ida);
         this.setVolta(volta);
         this.setHora_volta(hora_volta);
@@ -178,11 +174,11 @@ public class Requisicao {
         this.motivo = motivo;
     }
 
-    public boolean isHotel() {
+    public String getHotel() {
         return hotel;
     }
 
-    public void setHotel(boolean hotel) {
+    public void setHotel(String hotel) {
         this.hotel = hotel;
     }
 
@@ -242,7 +238,7 @@ public class Requisicao {
         }
         return true;
     }
-    
-    
+
+
 
 }

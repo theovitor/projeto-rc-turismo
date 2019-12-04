@@ -96,6 +96,9 @@ public class Localidade {
     public void setSetor(String setor) {
         this.setor = setor;
     }
+    public String toString(){
+        return nome_local;
+    }
 
     @Override
     public int hashCode() {

@@ -1,6 +1,7 @@
 package dados_entidades;
 
 import java.util.Objects;
+import javafx.scene.control.RadioButton;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,8 +15,7 @@ public class Passageiro {
     private Integer id_passageiro;
     private String nome;
     private String setor;
-    private boolean dirige;
-    private int CPF;
+    private String CPF;
     private String rua;
     private int numero;
     private String complemento;
@@ -25,14 +25,14 @@ public class Passageiro {
     private String email;
     private String gerente;
     private String email_gerente;
+     
 
     public Passageiro() {
     }
 
-    public Passageiro(String nome, String setor, boolean dirige, int CPF, String rua, int numero, String complemento, String bairro, String cidade, int CEP, String email, String gerente, String email_gerente) {
+    public Passageiro(String nome, String setor, String CPF, String rua, int numero, String complemento, String bairro, String cidade, int CEP, String email, String gerente, String email_gerente) {
         this.setNome(nome);
         this.setSetor(setor);
-        this.setDirige(dirige);
         this.setCPF(CPF);
         this.setRua(rua);
         this.setNumero(numero);
@@ -44,8 +44,7 @@ public class Passageiro {
         this.setGerente(gerente);
         this.setEmail_gerente(email_gerente);
     }
-
-    
+  
     
     public Integer getId_passageiro() {
         return id_passageiro;
@@ -71,19 +70,11 @@ public class Passageiro {
         this.setor = setor;
     }
 
-    public boolean isDirige() {
-        return dirige;
-    }
-
-    public void setDirige(boolean dirige) {
-        this.dirige = dirige;
-    }
-
-    public int getCPF() {
+    public String getCPF() {
         return CPF;
     }
 
-    public void setCPF(int CPF) {
+    public void setCPF(String CPF) {
         this.CPF = CPF;
     }
 
@@ -158,6 +149,10 @@ public class Passageiro {
     public void setEmail_gerente(String email_gerente) {
         this.email_gerente = email_gerente;
     }
+    
+    public String toString(){
+        return nome;
+    }
 
     @Override
     public int hashCode() {
@@ -182,8 +177,5 @@ public class Passageiro {
             return false;
         }
         return true;
-    }
-
-
-    
+    }  
 }
