@@ -78,6 +78,10 @@ public class Veiculo {
         this.n_passageiros = n_passageiros;
     }
     
+    public String toString(){
+        return modelo;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

@@ -124,7 +124,7 @@ public class JanelaLocalidadeController implements Initializable {
 
     @FXML
     private void editar(ActionEvent event) {
-        selecionado = (Localidade) tbLocalidade.getSelectionModel()
+        selecionado = tbLocalidade.getSelectionModel()
                 .getSelectedItem();
         if (selecionado != null) { 
             tfid.setText(String.valueOf(selecionado.getId_local()));
@@ -135,7 +135,7 @@ public class JanelaLocalidadeController implements Initializable {
             tfcity.setText(selecionado.getCidade());
             tfcep.setText(String.valueOf(selecionado.getCEP()));
             tfsetor.setText(selecionado.getSetor());
-        }else{ //não tem ator selecionado na tabela
+        }else{
             mensagemErro("Selecione Um Local!");
             }
     }

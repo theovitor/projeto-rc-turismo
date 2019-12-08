@@ -167,7 +167,6 @@ public class JanelaGerenciarController implements Initializable {
     @FXML
     private void confirmar(ActionEvent event) {
         if(tfid.getText().isEmpty()){
-           // boolean dirige = (radioS.isSelected() ? true : false);
             
            Requisicao r = new Requisicao(dpida.getValue(), tphida.getValue(), dpvolta.getValue(), 
                    tphvolta.getValue(), cborigem.getValue(), cbdestino.getValue(), tfcc.getText(), 
@@ -194,6 +193,9 @@ public class JanelaGerenciarController implements Initializable {
                 selecionado.setMotivo(tamotivo.getText());
                 selecionado.setHotel(cbhotel.getValue());
                 selecionado.setObservacoes(taobs.getText());
+                selecionado.setSituacao(cbsituacao.getValue());
+                selecionado.setMotorista(cbmotorista.getValue());
+                selecionado.setCarro(cbveiculo.getValue());
     
                 servico.editar(selecionado);
                 mensagemSucesso("Requisição Salva!"); 
@@ -224,6 +226,7 @@ public class JanelaGerenciarController implements Initializable {
         selecionado = (Requisicao) tbrequisicao.getSelectionModel()
                 .getSelectedItem();
         if (selecionado != null) { 
+            tfid.setText(String.valueOf(selecionado.getId_rc()));
             cbdestino.setValue(selecionado.getDestino());
             tfcc.setText(selecionado.getCentro_custo());
             cbpass1.setValue(selecionado.getPassageiro1());
@@ -242,7 +245,7 @@ public class JanelaGerenciarController implements Initializable {
             cbmotorista.setValue(selecionado.getMotorista());
             cbveiculo.setValue(selecionado.getCarro());
             
-        }else{ //não tem ator selecionado na tabela
+        }else{ 
             mensagemErro("Selecione uma requisição!");
         }
     }

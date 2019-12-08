@@ -1,5 +1,6 @@
 package dados_entidades;
 
+import EXCECAO.ValoresInvalidosExceptions;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,11 +16,10 @@ public class Condutor {
    private String nome_motorista;
    private String setor;
    private int CNH;
-   
-   
-public Condutor(){}
+    
+    public Condutor(){}
 
-    public Condutor(String nome_motorista, String setor, int CNH) {
+    public Condutor(String nome_motorista, String setor, int CNH) throws ValoresInvalidosExceptions {
         this.setNome_motorista (nome_motorista);
         this.setSetor(setor);
         this.setCNH(CNH);
@@ -37,7 +37,11 @@ public Condutor(){}
         return nome_motorista;
     }
 
-    public void setNome_motorista(String nome_motorista) {
+    public void setNome_motorista(String nome_motorista) throws ValoresInvalidosExceptions {
+        
+        if(!nome_motorista.matches("[\\p{L}\\s]+")){
+            throw new ValoresInvalidosExceptions("Nome Inválido! São aceitos apenas LETRAS e ESPAÇOS.");
+        }
         this.nome_motorista = nome_motorista;
     }
 
@@ -84,7 +88,4 @@ public Condutor(){}
         }
         return true;
     }
-   
-   
-    
 }

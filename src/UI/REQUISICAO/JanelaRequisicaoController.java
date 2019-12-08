@@ -192,6 +192,7 @@ public class JanelaRequisicaoController implements Initializable {
         selecionado = (Requisicao) tbrequisicao.getSelectionModel()
                 .getSelectedItem();
         if (selecionado != null) { 
+            tfid.setText(String.valueOf(selecionado.getId_rc()));
             cbdestino.setValue(selecionado.getDestino());
             tfcc.setText(selecionado.getCentro_custo());
             cbpass1.setValue(selecionado.getPassageiro1());

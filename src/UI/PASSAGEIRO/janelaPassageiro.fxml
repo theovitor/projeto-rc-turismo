@@ -66,6 +66,7 @@
             <TableColumn fx:id="colcomp" minWidth="100.0" prefWidth="67.0" text="COMPLEMENTO" />
             <TableColumn fx:id="colNger" minWidth="100.0" prefWidth="100.0" text="NOME DO GERENTE" />
             <TableColumn fx:id="colEger" minWidth="40.0" prefWidth="0.0" text="E-MAIL DO GERENTE" />
+            <TableColumn fx:id="colDirige" prefWidth="75.0" text="DIRIGE?" />
         </columns>
       </TableView>
       <Label layoutX="14.0" layoutY="172.0" prefHeight="29.0" prefWidth="51.0" text="Dirige?">

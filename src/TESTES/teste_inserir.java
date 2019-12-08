@@ -1,13 +1,14 @@
 
 package TESTES;
 
+import EXCECAO.ValoresInvalidosExceptions;
 import dados_entidades.Condutor;
 import javax.persistence.*;
 import UTIL.JPAUtil;
 
 
 public class teste_inserir {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ValoresInvalidosExceptions {
         Condutor c1=new Condutor();
         c1.setCNH(151511);
         c1.setNome_motorista("hader messias");

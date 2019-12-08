@@ -1,7 +1,7 @@
 package dados_entidades;
 
+import EXCECAO.ValoresInvalidosExceptions;
 import java.util.Objects;
-import javafx.scene.control.RadioButton;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,12 +25,14 @@ public class Passageiro {
     private String email;
     private String gerente;
     private String email_gerente;
+    private String dirige;
      
 
     public Passageiro() {
     }
 
-    public Passageiro(String nome, String setor, String CPF, String rua, int numero, String complemento, String bairro, String cidade, int CEP, String email, String gerente, String email_gerente) {
+    public Passageiro(String nome, String setor, String CPF, String rua, int numero, String complemento, String bairro, String cidade, int CEP, String email, String gerente, String email_gerente, String dirige) 
+            throws ValoresInvalidosExceptions{
         this.setNome(nome);
         this.setSetor(setor);
         this.setCPF(CPF);
@@ -43,6 +45,7 @@ public class Passageiro {
         this.setEmail(email);
         this.setGerente(gerente);
         this.setEmail_gerente(email_gerente);
+        this.setDirige(dirige);
     }
   
     
@@ -58,7 +61,11 @@ public class Passageiro {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(String nome) throws ValoresInvalidosExceptions{
+        
+        if(!nome.matches("[\\p{L}\\s]+")){
+            throw new ValoresInvalidosExceptions("Nome Inválido! São aceitos apenas LETRAS e ESPAÇOS.");
+        }
         this.nome = nome;
     }
 
@@ -148,6 +155,14 @@ public class Passageiro {
 
     public void setEmail_gerente(String email_gerente) {
         this.email_gerente = email_gerente;
+    }
+    
+    public String getDirige(){
+        return dirige;
+    }
+    
+    public void setDirige(String dirige){
+        this.dirige = dirige;
     }
     
     public String toString(){
