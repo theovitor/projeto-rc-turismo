@@ -6,6 +6,7 @@
 package UI.LOCALIDADE;
 
 import SERVICOS.LocalidadeServico;
+import UTIL.AlertaUtil;
 import com.jfoenix.controls.JFXTextField;
 import dados_entidades.Localidade;
 import java.net.URL;
@@ -29,8 +30,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author Sarah
  */
 public class JanelaLocalidadeController implements Initializable {
-
-       
+  
     @FXML
     private JFXTextField tfid;
     @FXML
@@ -51,9 +51,6 @@ public class JanelaLocalidadeController implements Initializable {
     private TableColumn colid;
     @FXML
     private TableColumn colnomelocal;
-    
-    private LocalidadeServico servico = new LocalidadeServico();
-    
     @FXML
     private TableColumn colsetor;
     @FXML
@@ -68,13 +65,14 @@ public class JanelaLocalidadeController implements Initializable {
     private TableColumn colcep;
     @FXML
     private TableView<Localidade> tbLocalidade;
-    
-    private ObservableList<Localidade> dados
-        = FXCollections.observableArrayList();
-    
-    private Localidade selecionado;
     @FXML
     private JFXTextField tfBuscarNome;
+    
+    private ObservableList<Localidade> dados = FXCollections.observableArrayList();
+    
+    private Localidade selecionado;
+   
+    private LocalidadeServico servico = new LocalidadeServico();
     
     /**
      * Initializes the controller class.
@@ -93,11 +91,11 @@ public class JanelaLocalidadeController implements Initializable {
                     Integer.parseInt(tfnumero.getText()), tfbairro.getText(), tfcity.getText(),
                     Integer.parseInt(tfcep.getText()), tfsetor.getText());
             servico.save_local(l);
-            mensagemSucesso("Local Salvo com Sucesso!");
+            AlertaUtil.mensagemSucesso("Local Salvo com Sucesso!");
             listaLocais();
         }else{
             Optional<ButtonType> btn = 
-                mensagemDeConfirmacao("Deseja mesmo salvar as alterações?",
+                AlertaUtil.mensagemDeConfirmacao("Deseja mesmo salvar as alterações?",
                       "EDITAR");
             if(btn.get() == ButtonType.OK){
                 selecionado.setNome_local(tfnomelocal.getText());
@@ -108,7 +106,7 @@ public class JanelaLocalidadeController implements Initializable {
                 selecionado.setCEP(Integer.parseInt(tfcep.getText()));
                 selecionado.setSetor(tfsetor.getText());
                 servico.editar(selecionado);
-                mensagemSucesso("Local Atualizado Com Sucesso!"); 
+                AlertaUtil.mensagemSucesso("Local Atualizado Com Sucesso!"); 
                 listaLocais(); 
             }
         }
@@ -136,7 +134,7 @@ public class JanelaLocalidadeController implements Initializable {
             tfcep.setText(String.valueOf(selecionado.getCEP()));
             tfsetor.setText(selecionado.getSetor());
         }else{
-            mensagemErro("Selecione Um Local!");
+            AlertaUtil.mensagemErro("Selecione Um Local!");
             }
     }
 
@@ -146,15 +144,15 @@ public class JanelaLocalidadeController implements Initializable {
                 .getSelectedItem();
         if(selecionado != null){
             Optional<ButtonType> btn = 
-                mensagemDeConfirmacao("Deseja mesmo excluir?",
+                AlertaUtil.mensagemDeConfirmacao("Deseja mesmo excluir?",
                       "EXCLUIR");
             if(btn.get() == ButtonType.OK){
                 servico.excluir(selecionado);
-                mensagemSucesso("Local Excluído Com Sucesso");
+                AlertaUtil.mensagemSucesso("Local Excluído Com Sucesso");
                 listaLocais();
             }
         }else{
-            mensagemErro("Selecione um Local!");
+            AlertaUtil.mensagemErro("Selecione um Local!");
         }
     }
     @FXML
@@ -190,30 +188,5 @@ public class JanelaLocalidadeController implements Initializable {
         List<Localidade> locais = servico.listar();
         dados = FXCollections.observableArrayList(locais);
         tbLocalidade.setItems(dados);
-    }
-    
-    public void mensagemSucesso(String m) {
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("SUCESSO!");
-        alerta.setHeaderText(null);
-        alerta.setContentText(m);
-        alerta.showAndWait();
-    }
-    
-    public void mensagemErro(String m) {
-        Alert alerta = new Alert(Alert.AlertType.ERROR);
-        alerta.setTitle("ERRO!");
-        alerta.setHeaderText(null);
-        alerta.setContentText(m);
-        alerta.showAndWait();
-    }
-    
-    private Optional<ButtonType> mensagemDeConfirmacao(
-            String mensagem, String titulo) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensagem);
-        return alert.showAndWait();
     }
 }

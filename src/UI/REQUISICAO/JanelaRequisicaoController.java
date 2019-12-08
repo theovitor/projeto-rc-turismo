@@ -8,6 +8,7 @@ package UI.REQUISICAO;
 import SERVICOS.LocalidadeServico;
 import SERVICOS.PassageiroServico;
 import SERVICOS.RequisicaoServico;
+import UTIL.AlertaUtil;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
@@ -26,7 +27,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -39,10 +39,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class JanelaRequisicaoController implements Initializable {
     
-    private RequisicaoServico servico = new RequisicaoServico();
-    private PassageiroServico passageiroServico = new PassageiroServico();
-    private LocalidadeServico localidadeServico = new LocalidadeServico();
-
     @FXML
     private TableColumn<?, ?> colid;
     @FXML
@@ -106,13 +102,18 @@ public class JanelaRequisicaoController implements Initializable {
     @FXML
     private JFXDatePicker dpida;
     
-     private Requisicao selecionado;
+    private Requisicao selecionado;
      
-     private ObservableList<Requisicao> dados = FXCollections.observableArrayList();
-
+    private ObservableList<Requisicao> dados = FXCollections.observableArrayList();
+    
+    private RequisicaoServico servico = new RequisicaoServico();
+    private PassageiroServico passageiroServico = new PassageiroServico();
+    private LocalidadeServico localidadeServico = new LocalidadeServico();
+    
     /**
      * Initializes the controller class.
      */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -133,17 +134,16 @@ public class JanelaRequisicaoController implements Initializable {
     @FXML
     private void salvar(ActionEvent event) {
         if(tfid.getText().isEmpty()){
-           // boolean dirige = (radioS.isSelected() ? true : false);
             
-           Requisicao r = new Requisicao(dpida.getValue(), tphida.getValue(), dpvolta.getValue(), 
-           tphvolta.getValue(), cborigem.getValue(), cbdestino.getValue(), tfcc.getText(), 
-           cbpass1.getValue(), cbpass2.getValue(), cbpass3.getValue(), cbpass4.getValue(),
-           tamotivo.getText(), cbhotel.getValue(), taobs.getText(), null, null, null);
-            servico.save_rc(r);
-            mensagemSucesso("Requisição Salva!");
-            listaRc();
+           Requisicao r = new Requisicao(dpida.getValue(), tphida.getValue(), dpvolta.getValue(),
+                   tphvolta.getValue(), cborigem.getValue(), cbdestino.getValue(), tfcc.getText(),
+                   cbpass1.getValue(), cbpass2.getValue(), cbpass3.getValue(), cbpass4.getValue(),
+                   tamotivo.getText(), cbhotel.getValue(), taobs.getText(), null, null, null);
+           servico.save_rc(r);
+           AlertaUtil.mensagemSucesso("Requisição Salva!");
+           listaRc();
         }else{
-            Optional<ButtonType> btn = mensagemDeConfirmacao("Dejesa Alterar?", "Editar");
+            Optional<ButtonType> btn = AlertaUtil.mensagemDeConfirmacao("Dejesa Alterar?", "Editar");
             if(btn.get()==ButtonType.OK){
                 selecionado.setIda(dpida.getValue());
                 selecionado.setHora_ida(tphida.getValue());
@@ -161,12 +161,10 @@ public class JanelaRequisicaoController implements Initializable {
                 selecionado.setObservacoes(taobs.getText());
     
                 servico.editar(selecionado);
-                mensagemSucesso("Requisição Salva!"); 
+                AlertaUtil.mensagemSucesso("Requisição Salva!"); 
                 listaRc();
             }
         }
-        
-        
         dpida.setValue(null);
         tphida.setValue(null);
         dpvolta.setValue(null);
@@ -180,13 +178,9 @@ public class JanelaRequisicaoController implements Initializable {
         cbpass4.setValue(null);
         tamotivo.setText("");
         cbhotel.setValue(null);
-        taobs.setText("");
-                    
+        taobs.setText("");               
     }
-        
-            
-    
-
+  
     @FXML
     private void editar(ActionEvent event) {
         selecionado = (Requisicao) tbrequisicao.getSelectionModel()
@@ -206,13 +200,10 @@ public class JanelaRequisicaoController implements Initializable {
             dpvolta.setValue(selecionado.getVolta());
             tphvolta.setValue(selecionado.getHora_volta());
             cborigem.setValue(selecionado.getOrigem());
-            dpida.setValue(selecionado.getIda());
-            
-            
+            dpida.setValue(selecionado.getIda()); 
         }else{ //não tem ator selecionado na tabela
-            mensagemErro("Selecione uma requisição!");
+            AlertaUtil.mensagemErro("Selecione uma requisição!");
         }
-        
     }
 
     @FXML
@@ -221,17 +212,16 @@ public class JanelaRequisicaoController implements Initializable {
                 .getSelectedItem();
         if(selecionado != null){
             Optional<ButtonType> btn = 
-                mensagemDeConfirmacao("Deseja mesmo excluir?",
+                AlertaUtil.mensagemDeConfirmacao("Deseja mesmo excluir?",
                       "EXCLUIR");
             if(btn.get() == ButtonType.OK){
                 servico.excluir(selecionado);
-                mensagemSucesso("Requisicao excluída Com Sucesso");
+                AlertaUtil.mensagemSucesso("Requisicao excluída Com Sucesso");
                 listaRc();
             }
         }else{
-            mensagemErro("Selecione uma Requisicao!");
+            AlertaUtil.mensagemErro("Selecione uma Requisicao!");
         }
-        
     }
 
     @FXML
@@ -240,11 +230,9 @@ public class JanelaRequisicaoController implements Initializable {
         LocalDate ida = dpida.getValue();
         List<Requisicao> data = servico.buscar(ida);
         dados = FXCollections.observableArrayList(data);
-        tbrequisicao.setItems(dados);
-        
+        tbrequisicao.setItems(dados);  
     }
-
-
+    
     private void confTabela(){
         colid.setCellValueFactory(
                 new PropertyValueFactory("id_rc"));
@@ -275,42 +263,14 @@ public class JanelaRequisicaoController implements Initializable {
         colmotivoviagem.setCellValueFactory(
                 new PropertyValueFactory("motivo"));
         colobs.setCellValueFactory(
-                new PropertyValueFactory("observacoes"));
-        
-               
+                new PropertyValueFactory("observacoes"));   
     }
-
-        
+    
     private void listaRc(){
         dados.clear();
         List<Requisicao> requisicao = servico.listar();
         dados = FXCollections.observableArrayList(requisicao);
         tbrequisicao.setItems(dados);
-    }
-    
-    public void mensagemSucesso(String m) {
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("SUCESSO!");
-        alerta.setHeaderText(null);
-        alerta.setContentText(m);
-        alerta.showAndWait();
-    }
-    
-    public void mensagemErro(String m) {
-        Alert alerta = new Alert(Alert.AlertType.ERROR);
-        alerta.setTitle("ERRO!");
-        alerta.setHeaderText(null);
-        alerta.setContentText(m);
-        alerta.showAndWait();
-    }
-    
-    private Optional<ButtonType> mensagemDeConfirmacao(
-            String mensagem, String titulo) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensagem);
-        return alert.showAndWait();
     }
     
     private void listarPassageiros() {
@@ -321,7 +281,6 @@ public class JanelaRequisicaoController implements Initializable {
         cbpass2.setItems(FXCollections.observableArrayList(passageiros));
         cbpass3.setItems(FXCollections.observableArrayList(passageiros));
         cbpass4.setItems(FXCollections.observableArrayList(passageiros));
-
     }
     
     private void listarLocalidades() {
@@ -330,7 +289,6 @@ public class JanelaRequisicaoController implements Initializable {
 
         cborigem.setItems(FXCollections.observableArrayList(localidade));
         cbdestino.setItems(FXCollections.observableArrayList(localidade));
-    }
-    
+    }  
 }
 

@@ -10,6 +10,7 @@ import SERVICOS.GerenciarServico;
 import SERVICOS.LocalidadeServico;
 import SERVICOS.PassageiroServico;
 import SERVICOS.VeiculoServico;
+import UTIL.AlertaUtil;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
@@ -43,13 +44,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class JanelaGerenciarController implements Initializable {
 
-    
-    private GerenciarServico servico = new GerenciarServico();
-    private PassageiroServico passageiroServico = new PassageiroServico();
-    private LocalidadeServico localidadeServico = new LocalidadeServico();
-    private CondutorServico condutorServico = new CondutorServico();
-    private VeiculoServico veiculoServico = new VeiculoServico();
-    
     @FXML
     private JFXTextField tfid;
     @FXML
@@ -129,7 +123,12 @@ public class JanelaGerenciarController implements Initializable {
      
     private ObservableList<Requisicao> dados = FXCollections.observableArrayList();
     
-
+    private GerenciarServico servico = new GerenciarServico();
+    private PassageiroServico passageiroServico = new PassageiroServico();
+    private LocalidadeServico localidadeServico = new LocalidadeServico();
+    private CondutorServico condutorServico = new CondutorServico();
+    private VeiculoServico veiculoServico = new VeiculoServico();
+    
     /**
      * Initializes the controller class.
      */
@@ -174,10 +173,10 @@ public class JanelaGerenciarController implements Initializable {
                    tamotivo.getText(), cbhotel.getValue(), taobs.getText(), cbsituacao.getValue(),
                    cbmotorista.getValue(), cbveiculo.getValue());
            servico.save_grc(r);
-           mensagemSucesso("Requisição Salva!");
+           AlertaUtil.mensagemSucesso("Requisição Salva!");
            listaGRc();
         }else{
-            Optional<ButtonType> btn = mensagemDeConfirmacao("Dejesa Alterar?", "Editar");
+            Optional<ButtonType> btn = AlertaUtil.mensagemDeConfirmacao("Dejesa Alterar?", "Editar");
             if(btn.get()==ButtonType.OK){
                 selecionado.setIda(dpida.getValue());
                 selecionado.setHora_ida(tphida.getValue());
@@ -198,7 +197,7 @@ public class JanelaGerenciarController implements Initializable {
                 selecionado.setCarro(cbveiculo.getValue());
     
                 servico.editar(selecionado);
-                mensagemSucesso("Requisição Salva!"); 
+                AlertaUtil.mensagemSucesso("Requisição Salva!"); 
                 listaGRc();
             }
         }
@@ -246,7 +245,7 @@ public class JanelaGerenciarController implements Initializable {
             cbveiculo.setValue(selecionado.getCarro());
             
         }else{ 
-            mensagemErro("Selecione uma requisição!");
+            AlertaUtil.mensagemErro("Selecione uma requisição!");
         }
     }
 
@@ -256,15 +255,15 @@ public class JanelaGerenciarController implements Initializable {
                 .getSelectedItem();
         if(selecionado != null){
             Optional<ButtonType> btn = 
-                mensagemDeConfirmacao("Deseja mesmo cancelar a viajem?",
+                AlertaUtil.mensagemDeConfirmacao("Deseja mesmo cancelar a viajem?",
                       "EXCLUIR");
             if(btn.get() == ButtonType.OK){
                 servico.excluir(selecionado);
-                mensagemSucesso("Requisicao excluída Com Sucesso");
+                AlertaUtil.mensagemSucesso("Requisicao excluída Com Sucesso");
                 listaGRc();
             }
         }else{
-            mensagemErro("Selecione uma Requisicao!");
+            AlertaUtil.mensagemErro("Selecione uma Requisicao!");
         }
     }
     
@@ -314,31 +313,6 @@ public class JanelaGerenciarController implements Initializable {
         tbrequisicao.setItems(dados);
     }
     
-    public void mensagemSucesso(String m) {
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("SUCESSO!");
-        alerta.setHeaderText(null);
-        alerta.setContentText(m);
-        alerta.showAndWait();
-    }
-    
-    public void mensagemErro(String m) {
-        Alert alerta = new Alert(Alert.AlertType.ERROR);
-        alerta.setTitle("ERRO!");
-        alerta.setHeaderText(null);
-        alerta.setContentText(m);
-        alerta.showAndWait();
-    }
-    
-    private Optional<ButtonType> mensagemDeConfirmacao(
-            String mensagem, String titulo) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensagem);
-        return alert.showAndWait();
-    }
-    
     private void listarPassageiros() {
 
         List<Passageiro> passageiros = passageiroServico.listar();
@@ -347,7 +321,6 @@ public class JanelaGerenciarController implements Initializable {
         cbpass2.setItems(FXCollections.observableArrayList(passageiros));
         cbpass3.setItems(FXCollections.observableArrayList(passageiros));
         cbpass4.setItems(FXCollections.observableArrayList(passageiros));
-
     }
     
     private void listarLocalidades() {

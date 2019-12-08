@@ -20,7 +20,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -154,6 +153,7 @@ public class JanelaPassageiroController implements Initializable {
                 listaPassageiros();
             }catch(ValoresInvalidosExceptions ex){
                 AlertaUtil.mensagemErro(ex.getMessage());
+                }
             }
         }
         tfnomepassageiro.setText("");
@@ -169,7 +169,6 @@ public class JanelaPassageiroController implements Initializable {
         tfrua.setText("");        
         tfsetor.setText("");
         cbDirige.setValue(null);
-        }
     }
 
     @FXML

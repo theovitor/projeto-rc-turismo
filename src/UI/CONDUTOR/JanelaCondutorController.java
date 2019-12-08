@@ -94,13 +94,13 @@ public class JanelaCondutorController implements Initializable {
                 listaCondutores(); 
             }catch(ValoresInvalidosExceptions ex){
                 AlertaUtil.mensagemErro(ex.getMessage());
+                }
             }
         }
             tfid.setText("");
             tfnomemotorista.setText("");
             tfsetor.setText("");
             tfcnh.setText("");
-        }
     }
     
     @FXML

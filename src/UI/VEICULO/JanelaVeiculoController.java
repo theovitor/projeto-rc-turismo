@@ -6,6 +6,7 @@
 package UI.VEICULO;
 
 import SERVICOS.VeiculoServico;
+import UTIL.AlertaUtil;
 import com.jfoenix.controls.JFXTextField;
 import dados_entidades.Veiculo;
 import java.net.URL;
@@ -17,7 +18,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -43,7 +43,7 @@ public class JanelaVeiculoController implements Initializable {
     @FXML
     private JFXTextField tfplaca;
     
-    private VeiculoServico servico = new VeiculoServico();
+    
     
     @FXML
     private TableView<Veiculo> tbveiculo;
@@ -59,15 +59,15 @@ public class JanelaVeiculoController implements Initializable {
     private TableColumn<?, ?> collocalidade;
     @FXML
     private TableColumn<?, ?> colnumpassag;
-    
-    private ObservableList<Veiculo> dados
-        = FXCollections.observableArrayList();
-    
-    private Veiculo selecionado;
     @FXML
     private JFXTextField tfBuscarNome;
     
-
+    private VeiculoServico servico = new VeiculoServico();
+    
+    private Veiculo selecionado;
+    
+    private ObservableList<Veiculo> dados = FXCollections.observableArrayList();
+    
     /**
      * Initializes the controller class.
      */
@@ -87,11 +87,11 @@ public class JanelaVeiculoController implements Initializable {
                     Integer.parseInt(tfnpassageiros.getText()));
             
             servico.save_veic(v);
-            mensagemSucesso("Veiculo Salvo com Sucesso!");
+            AlertaUtil.mensagemSucesso("Veiculo Salvo com Sucesso!");
             listaVeiculos();
         }else{
             Optional<ButtonType> btn = 
-                mensagemDeConfirmacao("Deseja mesmo salvar as alterações?",
+                AlertaUtil.mensagemDeConfirmacao("Deseja mesmo salvar as alterações?",
                       "EDITAR");
             if(btn.get() == ButtonType.OK){
                 selecionado.setModelo(tfmodeloveiculo.getText());
@@ -100,7 +100,7 @@ public class JanelaVeiculoController implements Initializable {
                 selecionado.setN_passageiros(Integer.parseInt(tfnpassageiros.getText()));
                 selecionado.setPlaca(tfplaca.getText());
                 servico.editar(selecionado);
-                mensagemSucesso("Local Atualizado Com Sucesso!"); 
+                AlertaUtil.mensagemSucesso("Local Atualizado Com Sucesso!"); 
                 listaVeiculos(); 
             }
         }
@@ -123,8 +123,8 @@ public class JanelaVeiculoController implements Initializable {
             tflocalidadeveiculo.setText(selecionado.getLocalidade());
             tfnpassageiros.setText(String.valueOf(selecionado.getN_passageiros()));
             tfplaca.setText(selecionado.getPlaca());
-        }else{ //não tem ator selecionado na tabela
-            mensagemErro("Selecione Um Veiculo!");
+        }else{
+            AlertaUtil.mensagemErro("Selecione Um Veiculo!");
             }
     }
 
@@ -134,15 +134,15 @@ public class JanelaVeiculoController implements Initializable {
                 .getSelectedItem();
         if(selecionado != null){
             Optional<ButtonType> btn = 
-                mensagemDeConfirmacao("Deseja mesmo excluir?",
+                AlertaUtil.mensagemDeConfirmacao("Deseja mesmo excluir?",
                       "EXCLUIR");
             if(btn.get() == ButtonType.OK){
                 servico.excluir(selecionado);
-                mensagemSucesso("Veiculo Excluído Com Sucesso");
+                AlertaUtil.mensagemSucesso("Veiculo Excluído Com Sucesso");
                 listaVeiculos();
             }
         }else{
-            mensagemErro("Selecione um Veiculo!");
+            AlertaUtil.mensagemErro("Selecione um Veiculo!");
         }
     }
 
@@ -160,31 +160,6 @@ public class JanelaVeiculoController implements Initializable {
         List<Veiculo> locais = servico.listar();
         dados = FXCollections.observableArrayList(locais);
         tbveiculo.setItems(dados);
-    }
-    
-    public void mensagemSucesso(String m) {
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("SUCESSO!");
-        alerta.setHeaderText(null);
-        alerta.setContentText(m);
-        alerta.showAndWait();
-    }
-    
-    public void mensagemErro(String m) {
-        Alert alerta = new Alert(Alert.AlertType.ERROR);
-        alerta.setTitle("ERRO!");
-        alerta.setHeaderText(null);
-        alerta.setContentText(m);
-        alerta.showAndWait();
-    }
-    
-    private Optional<ButtonType> mensagemDeConfirmacao(
-            String mensagem, String titulo) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensagem);
-        return alert.showAndWait();
     }
     
     private void confTabela(){
